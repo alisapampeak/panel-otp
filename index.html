@@ -158,7 +158,7 @@
         let CURRENT_API_KEY = localStorage.getItem('herosms_key') || "";
         
         // MENGGUNAKAN ALLORIGINS UNTUK BYPASS CORS DI GITHUB PAGES
-        const PROXY = "https://corsproxy.io/?https://hero-sms.com/stubs/handler_api.php";
+        const PROXY = "https://corsproxy.io/raw?url=";
         const API_TARGET = "https://hero-sms.com/stubs/handler_api.php";
         
         function getBaseUrl(params) {
@@ -255,3 +255,4 @@
 </body>
 
 </html>
+
