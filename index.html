@@ -15,162 +15,225 @@
             --border: #334155;
             --success: #2ecc71;
             --danger: #ef4444;
-            --sidebar-width: 240px;
-            --header-height: 82px; 
-            --container-max-width: 800px; /* Ukuran card tetap/fix */
+            --nav-height: 70px;
         }
-        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text); margin: 0; display: flex; overflow-x: hidden; }
-        
-        /* Sidebar */
-        .sidebar { width: var(--sidebar-width); background: var(--bg-card); height: 100vh; position: fixed; border-right: 1px solid var(--border); z-index: 1000; }
-        .sidebar-header { 
-            height: var(--header-height); display: flex; align-items: center; justify-content: center; 
-            border-bottom: 1px solid var(--border); box-sizing: border-box; 
-            font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; color: var(--primary);
-        }
-        .sidebar-content { padding: 15px; }
-        .nav-link { display: flex; align-items: center; padding: 12px 15px; color: var(--text-light); text-decoration: none; border-radius: 8px; cursor: pointer; margin-bottom: 8px; font-size: 0.85rem; transition: 0.3s; }
-        .nav-link:hover, .nav-link.active { background: var(--primary); color: white; }
 
-        /* Main Content */
-        .main-content { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); min-height: 100vh; }
-        
-        /* Header */
-        .top-bar { 
-            height: var(--header-height); background: var(--bg-card); padding: 0 25px; display: flex; align-items: center; 
-            justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 999; box-sizing: border-box;
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg-dark); 
+            color: var(--text); 
+            margin: 0; 
+            padding-top: var(--nav-height); /* Memberi ruang agar konten tidak tertutup navbar */
         }
-        .header-clock { font-size: 1.1rem; font-weight: 800; font-family: 'Monaco', monospace; }
-        
-        .header-right { display: flex; align-items: center; gap: 15px; }
-        .api-badge { 
-            display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.3); 
-            padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); 
-            font-size: 0.7rem; font-weight: 800; cursor: pointer;
+
+        /* Navbar Atas */
+        .navbar {
+            height: var(--nav-height);
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
-        #status-dot { width: 8px; height: 8px; border-radius: 50%; background: #64748b; }
-        #otp-balance-display { color: var(--success); font-weight: 800; font-size: 1rem; background: rgba(46, 204, 113, 0.1); padding: 8px 15px; border-radius: 8px; border: 1px solid var(--success); }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-item {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+        }
+
+        /* Header Info (Clock & Balance) */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .clock {
+            font-family: 'Monaco', monospace;
+            font-weight: 800;
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        #otp-balance-display {
+            color: var(--success);
+            font-weight: 800;
+            background: rgba(46, 204, 113, 0.1);
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--success);
+            cursor: pointer;
+        }
+
+        /* Container */
+        .container {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        h2 { margin-top: 0; font-size: 1.25rem; margin-bottom: 20px; }
+
+        input, select {
+            width: 100%;
+            padding: 14px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: white;
+            margin-top: 10px;
+            outline: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-action {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            width: 100%;
+            margin-top: 15px;
+            transition: 0.2s;
+        }
+
+        .btn-action:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        /* Tables */
+        .result-box {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { background: rgba(255,255,255,0.03); color: var(--text-light); font-size: 0.7rem; text-align: left; padding: 15px; border-bottom: 1px solid var(--border); text-transform: uppercase; }
+        td { padding: 15px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        
+        .btn-cancel { background: var(--danger); border: none; color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; }
 
         /* Modal */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); }
-        .modal-content { background: var(--bg-card); margin: 12% auto; padding: 30px; border-radius: 15px; width: 350px; border: 1px solid var(--border); }
-        
-        /* Layout Card Fix Size */
-        .container { 
-            padding: 30px; 
-            max-width: var(--container-max-width); /* Membuat ukuran card fix di desktop */
-            margin: 0 auto; /* Tengah-tengah */
-        }
-        .card { background: var(--bg-card); padding: 25px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 25px; box-sizing: border-box; }
-        input, select { width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid var(--border); border-radius: 8px; color: white; margin-top: 8px; font-size: 0.9rem; box-sizing: border-box; }
-        .btn-action { background: var(--primary); color: white; border: none; padding: 14px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 10px; }
+        .modal-content { background: var(--bg-card); margin: 15vh auto; padding: 30px; border-radius: 20px; width: 320px; border: 1px solid var(--border); }
 
-        /* Table Design */
-        .result-box { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; min-width: 400px; }
-        th { background: rgba(255,255,255,0.03); color: var(--text-light); font-size: 0.65rem; text-align: left; padding: 15px; border-bottom: 1px solid var(--border); text-transform: uppercase; }
-        td { padding: 15px; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
-        .price-tag { color: var(--success); font-weight: 800; font-family: 'Monaco', monospace; }
-        .stock-tag { background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 5px; font-size: 0.75rem; color: var(--text-light); }
-        
-        .spinning { animation: spin 1s linear infinite; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        .btn-cancel { background: var(--danger); border: none; color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.7rem; }
-
-        /* Mobile Responsive Adjustments */
+        /* Responsive Mobile */
         @media (max-width: 768px) {
-            .sidebar { width: 60px; }
-            .sidebar-header { font-size: 0.8rem; }
-            .nav-link span { display: none; }
-            .nav-link i { font-size: 1.2rem; margin: 0; }
-            .main-content { margin-left: 60px; width: calc(100% - 60px); }
-            .container { padding: 15px; width: 100%; }
-            .header-clock { font-size: 0.9rem; }
+            .navbar { padding: 0 15px; }
+            .nav-item span { display: none; }
+            .nav-brand { font-size: 1.2rem; }
+            .clock { display: none; }
+            .container { padding: 20px 15px; }
         }
     </style>
 </head>
 <body>
 
+    <nav class="navbar">
+        <div class="nav-brand">OTP</div>
+        
+        <div class="nav-links">
+            <a class="nav-item active" id="nav-home" onclick="showTab('home')"><i class="fas fa-th-large"></i><span>Home</span></a>
+            <a class="nav-item" id="nav-order" onclick="showTab('otp-order')"><i class="fas fa-shopping-cart"></i><span>Order</span></a>
+            <a class="nav-item" id="nav-active" onclick="showTab('otp-active')"><i class="fas fa-clock"></i><span>Active</span></a>
+        </div>
+
+        <div class="header-right">
+            <div id="header-clock" class="clock">00:00:00</div>
+            <div id="otp-balance-display" onclick="openModal()">$ 0.00</div>
+        </div>
+    </nav>
+
     <div id="apiModal" class="modal">
         <div class="modal-content">
-            <h3 style="margin-top:0">API Settings</h3>
-            <input type="password" id="api-key-input" placeholder="Masukkan API Key...">
-            <button class="btn-action" onclick="saveApiKey()">Save & Connect</button>
-            <button class="btn-action" onclick="closeModal()" style="background:transparent; border:1px solid var(--border); margin-top:10px;">Cancel</button>
+            <h3 style="margin-top:0">Settings</h3>
+            <p style="font-size: 0.8rem; color: var(--text-light);">Update API Key HeroSMS (USD)</p>
+            <input type="password" id="api-key-input" placeholder="Paste API Key here...">
+            <button class="btn-action" onclick="saveApiKey()">Save API</button>
+            <button class="btn-action" onclick="closeModal()" style="background:transparent; border:1px solid var(--border); margin-top:10px;">Close</button>
         </div>
     </div>
 
-    <div class="sidebar">
-        <div class="sidebar-header">OTP</div>
-        <div class="sidebar-content">
-            <a class="nav-link active" id="nav-home" onclick="showTab('home')"><i class="fas fa-th-large"></i> <span>&nbsp; Dashboard</span></a>
-            <a class="nav-link" id="nav-order" onclick="showTab('otp-order')"><i class="fas fa-shopping-cart"></i> <span>&nbsp; Order</span></a>
-            <a class="nav-link" id="nav-status" onclick="showTab('otp-status')"><i class="fas fa-sync"></i> <span>&nbsp; Check OTP</span></a>
-            <a class="nav-link" id="nav-active" onclick="showTab('otp-active')"><i class="fas fa-clock"></i> <span>&nbsp; Active</span></a>
-        </div>
-    </div>
-
-    <div class="main-content">
-        <div class="top-bar">
-            <div class="header-info">
-                <div id="header-clock" class="header-clock">00:00:00</div>
-            </div>
-            <div class="header-right">
-                <div class="api-badge" onclick="openModal()">
-                    <div id="status-dot"></div>
-                    <span id="status-text">OFFLINE</span>
+    <div class="container">
+        <div id="tab-home" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                    <h2 style="margin:0">Indonesia Stock 🇮🇩</h2>
+                    <button onclick="getPrices()" style="background:var(--primary); border:none; color:white; width:35px; height:35px; border-radius:8px; cursor:pointer;"><i class="fas fa-sync" id="refresh-icon"></i></button>
                 </div>
-                <div id="otp-balance-display">$ 0.00</div>
+                <div class="result-box">
+                    <table>
+                        <thead><tr><th>Layanan</th><th>Stok</th><th>Harga</th></tr></thead>
+                        <tbody id="dashboard-prices"><tr><td colspan="3" style="text-align:center; padding:30px;">Loading data...</td></tr></tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <div class="container">
-            <div id="tab-home" class="tab-content">
-                <div class="card">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                        <h2 style="margin:0">Indonesia Stock 🇮🇩</h2>
-                        <button id="btn-refresh" onclick="getPrices()" style="background:var(--primary); border:none; color:white; padding:8px 15px; border-radius:8px; cursor:pointer;">
-                            <i class="fas fa-sync" id="refresh-icon"></i>
-                        </button>
-                    </div>
-                    <div class="result-box">
-                        <table>
-                            <thead><tr><th>Layanan</th><th>Stock</th><th>Harga</th></tr></thead>
-                            <tbody id="dashboard-prices"><tr><td colspan="3" style="text-align:center; padding:30px;">Waiting...</td></tr></tbody>
-                        </table>
-                    </div>
-                </div>
+        <div id="tab-otp-order" class="tab-content" style="display:none">
+            <div class="card">
+                <h2>New Order</h2>
+                <select id="order-service">
+                    <option value="wa">WhatsApp</option><option value="tg">Telegram</option><option value="go">Google</option>
+                    <option value="tk">TikTok</option><option value="fb">Facebook</option><option value="ig">Instagram</option>
+                    <option value="sh">Shopee</option><option value="tw">Twitter</option>
+                </select>
+                <button class="btn-action" onclick="heroSmsAction('order')">PURCHASE NUMBER</button>
+                <div id="result-otp-order" class="result-box" style="display:none; padding:20px; text-align:center;"></div>
             </div>
+        </div>
 
-            <div id="tab-otp-order" class="tab-content" style="display:none">
-                <div class="card">
-                    <h2>Order Number</h2>
-                    <select id="order-service">
-                        <option value="wa">WhatsApp</option><option value="tg">Telegram</option><option value="go">Google</option>
-                        <option value="tk">TikTok</option><option value="fb">Facebook</option><option value="ig">Instagram</option>
-                    </select>
-                    <button class="btn-action" onclick="heroSmsAction('order')">ORDER</button>
-                    <div id="result-otp-order" class="result-box" style="display:none; padding:20px; text-align:center; margin-top:15px;"></div>
+        <div id="tab-otp-active" class="tab-content" style="display:none">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                    <h2 style="margin:0">Active Activations</h2>
+                    <button class="btn-action" style="width:100px; margin-top:0; font-size:0.8rem;" onclick="heroSmsAction('active')">REFRESH</button>
                 </div>
-            </div>
-
-            <div id="tab-otp-status" class="tab-content" style="display:none">
-                <div class="card">
-                    <h2>Check OTP</h2>
-                    <input type="text" id="status-id" placeholder="ID Transaksi...">
-                    <button class="btn-action" onclick="heroSmsAction('status')">GET CODE</button>
-                    <div id="result-otp-status" class="result-box" style="display:none; padding:20px; text-align:center; margin-top:15px;"></div>
-                </div>
-            </div>
-
-            <div id="tab-otp-active" class="tab-content" style="display:none">
-                <div class="card">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                        <h2 style="margin:0">Active</h2>
-                        <button class="btn-action" style="width:80px; margin-top:0;" onclick="heroSmsAction('active')"><i class="fas fa-sync"></i></button>
-                    </div>
-                    <div id="result-otp-active" class="result-box"></div>
-                </div>
+                <div id="result-otp-active" class="result-box"></div>
             </div>
         </div>
     </div>
@@ -184,25 +247,25 @@
             return PROXY + encodeURIComponent(API_TARGET + "?" + params);
         }
 
-        const serviceNames = { 'wa': 'WhatsApp', 'tg': 'Telegram', 'go': 'Google', 'tk': 'TikTok', 'fb': 'Facebook', 'ig': 'Instagram' };
+        const serviceNames = { 'wa': 'WhatsApp', 'tg': 'Telegram', 'go': 'Google', 'tk': 'TikTok', 'fb': 'Facebook', 'ig': 'Instagram', 'sh': 'Shopee', 'tw': 'Twitter' };
 
         function openModal() { document.getElementById('apiModal').style.display = 'block'; }
         function closeModal() { document.getElementById('apiModal').style.display = 'none'; }
+        
         function saveApiKey() {
             const val = document.getElementById('api-key-input').value.trim();
             if(val) { CURRENT_API_KEY = val; localStorage.setItem('herosms_key', val); connectAPI(); closeModal(); }
         }
 
         function updateClock() {
-            const now = new Date();
-            document.getElementById('header-clock').innerText = now.toLocaleTimeString('id-ID', {hour12:false});
+            document.getElementById('header-clock').innerText = new Date().toLocaleTimeString('id-ID', {hour12:false});
         }
 
         window.onload = () => { setInterval(updateClock, 1000); updateClock(); if(CURRENT_API_KEY) connectAPI(); showTab('home'); };
 
         function showTab(name) {
             document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
-            document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById('tab-' + name).style.display = 'block';
             const navId = name.includes('otp') ? 'nav-' + name.split('-')[1] : 'nav-' + name;
             document.getElementById(navId).classList.add('active');
@@ -216,8 +279,6 @@
                 const res = await fetch(getBaseUrl(`api_key=${CURRENT_API_KEY}&action=getBalance`));
                 const data = await res.text();
                 if (data.includes("ACCESS_BALANCE")) {
-                    document.getElementById('status-dot').style.background = "#2ecc71";
-                    document.getElementById('status-text').innerText = "CONNECTED";
                     document.getElementById('otp-balance-display').innerText = "$ " + data.split(':')[1];
                     getPrices();
                 }
@@ -226,7 +287,7 @@
 
         async function getPrices() {
             const icon = document.getElementById('refresh-icon');
-            icon.classList.add('spinning');
+            icon.classList.add('fa-spin');
             try {
                 const res = await fetch(getBaseUrl(`api_key=${CURRENT_API_KEY}&action=getPrices&country=6`));
                 const json = await res.json();
@@ -234,19 +295,19 @@
                 const dataID = json["6"] || {};
                 for(let s in dataID) {
                     if(serviceNames[s]) {
-                        rows += `<tr><td><b>${serviceNames[s]}</b></td><td><span class="stock-tag">${dataID[s].count} Pcs</span></td><td class="price-tag">$ ${dataID[s].cost}</td></tr>`;
+                        rows += `<tr><td><b>${serviceNames[s]}</b></td><td>${dataID[s].count}</td><td style="color:var(--success); font-weight:800">$ ${dataID[s].cost}</td></tr>`;
                     }
                 }
                 document.getElementById('dashboard-prices').innerHTML = rows || "<tr><td colspan='3'>No Data</td></tr>";
-            } finally { icon.classList.remove('spinning'); }
+            } finally { setTimeout(()=>icon.classList.remove('fa-spin'), 500); }
         }
 
         async function heroSmsAction(type) {
             const box = document.getElementById(`result-otp-${type}`);
-            box.innerHTML = "Loading..."; box.style.display = "block";
+            box.innerHTML = "<div style='padding:20px; text-align:center;'><i class='fas fa-spinner fa-spin'></i></div>";
+            box.style.display = "block";
             let params = `api_key=${CURRENT_API_KEY}`;
             if(type === 'order') params += `&action=getNumber&service=${document.getElementById('order-service').value}&country=6`;
-            if(type === 'status') params += `&action=getStatus&id=${document.getElementById('status-id').value}`;
             if(type === 'active') params += `&action=getActiveActivations`;
 
             try {
@@ -255,20 +316,23 @@
                 if(type === 'active') {
                     const json = JSON.parse(raw);
                     const list = json.activeActivations?.rows || [];
-                    let h = "<table><thead><tr><th>ID</th><th>Num</th><th>OTP</th><th>Action</th></tr></thead><tbody>";
-                    h += list.map(a => `<tr><td>${a.activationId}</td><td>+${a.phoneNumber}</td><td style="color:var(--success); font-weight:800">${a.smsCode || '-'}</td><td><button class="btn-cancel" onclick="cancelOrder('${a.activationId}')">Cancel</button></td></tr>`).join('');
+                    if(list.length === 0) { box.innerHTML = "<div style='padding:30px; color:gray; text-align:center;'>No active numbers.</div>"; return; }
+                    let h = "<table><thead><tr><th>ID</th><th>Number</th><th>OTP</th><th>Action</th></tr></thead><tbody>";
+                    h += list.map(a => `<tr><td>${a.activationId}</td><td>+${a.phoneNumber}</td><td style="color:var(--success); font-weight:800">${a.smsCode || 'Waiting...'}</td><td><button class="btn-cancel" onclick="cancelOrder('${a.activationId}')">Cancel</button></td></tr>`).join('');
                     box.innerHTML = h + "</tbody></table>";
                 } else if(type === 'order' && raw.includes("ACCESS_NUMBER")) {
                     const [ , id, num] = raw.split(':');
-                    box.innerHTML = `ID: ${id}<br><b style="font-size:1.5rem">+${num}</b><br><button class="btn-cancel" onclick="cancelOrder('${id}')" style="margin-top:10px">Cancel/Refund</button>`;
-                } else { box.innerHTML = raw; }
+                    box.innerHTML = `<div style='padding:20px;'>ID: ${id}<br><b style='font-size:1.8rem; margin:10px 0; display:block;'>+${num}</b><button class="btn-cancel" onclick="cancelOrder('${id}')" style="width:100%">Cancel & Refund</button></div>`;
+                } else { box.innerHTML = `<div style='padding:20px;'>${raw}</div>`; }
+                connectAPI();
             } catch(e) { box.innerHTML = "Error."; }
         }
 
         async function cancelOrder(id) {
             if(!confirm("Refund saldo?")) return;
             await fetch(getBaseUrl(`api_key=${CURRENT_API_KEY}&action=setStatus&status=8&id=${id}`));
-            connectAPI(); if(document.getElementById('tab-otp-active').style.display === 'block') heroSmsAction('active');
+            connectAPI(); 
+            if(document.getElementById('tab-otp-active').style.display === 'block') heroSmsAction('active');
         }
     </script>
 </body>
