@@ -18,156 +18,66 @@
             --nav-height: 70px;
         }
 
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: var(--bg-dark); 
-            color: var(--text); 
-            margin: 0; 
-            padding-top: var(--nav-height); /* Memberi ruang agar konten tidak tertutup navbar */
-        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text); margin: 0; padding-top: var(--nav-height); }
 
-        /* Navbar Atas */
+        /* Navbar */
         .navbar {
-            height: var(--nav-height);
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 5%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
+            height: var(--nav-height); background: var(--bg-card); border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 5%;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
         }
 
-        .nav-brand {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--primary);
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 10px;
-        }
-
+        .nav-brand { font-size: 1.5rem; font-weight: 900; color: var(--primary); letter-spacing: 1px; }
+        .nav-links { display: flex; gap: 8px; }
         .nav-item {
-            color: var(--text-light);
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            color: var(--text-light); text-decoration: none; padding: 8px 12px; border-radius: 8px;
+            font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px;
         }
+        .nav-item:hover, .nav-item.active { background: rgba(79, 70, 229, 0.1); color: var(--primary); }
 
-        .nav-item:hover, .nav-item.active {
-            background: rgba(79, 70, 229, 0.1);
-            color: var(--primary);
-        }
-
-        /* Header Info (Clock & Balance) */
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .clock {
-            font-family: 'Monaco', monospace;
-            font-weight: 800;
-            color: var(--text);
-            font-size: 1rem;
-        }
-
+        /* Status & Balance UI */
+        .header-right { display: flex; align-items: center; gap: 10px; }
+        
         #otp-balance-display {
-            color: var(--success);
-            font-weight: 800;
-            background: rgba(46, 204, 113, 0.1);
-            padding: 6px 12px;
-            border-radius: 6px;
-            border: 1px solid var(--success);
-            cursor: pointer;
+            font-weight: 800; font-size: 0.9rem; padding: 8px 15px; border-radius: 8px; 
+            cursor: pointer; transition: 0.3s; border: 1px solid #64748b; color: #64748b; background: rgba(100, 116, 139, 0.1);
+            min-width: 80px; text-align: center;
         }
+        /* State Online */
+        #otp-balance-display.online { color: var(--success); border-color: var(--success); background: rgba(46, 204, 113, 0.1); }
+        /* State Offline */
+        #otp-balance-display.offline { color: var(--danger); border-color: var(--danger); background: rgba(239, 68, 68, 0.1); }
 
-        /* Container */
-        .container {
-            padding: 40px 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: var(--bg-card);
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
-
-        h2 { margin-top: 0; font-size: 1.25rem; margin-bottom: 20px; }
-
-        input, select {
-            width: 100%;
-            padding: 14px;
-            background: var(--bg-dark);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: white;
-            margin-top: 10px;
-            outline: none;
-            font-size: 0.95rem;
-        }
-
-        .btn-action {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 700;
-            width: 100%;
-            margin-top: 15px;
+        .btn-refresh-balance {
+            background: var(--bg-dark); border: 1px solid var(--border); color: var(--text-light);
+            width: 38px; height: 38px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center;
             transition: 0.2s;
         }
+        .btn-refresh-balance:hover { border-color: var(--primary); color: var(--primary); }
 
-        .btn-action:hover { opacity: 0.9; transform: translateY(-1px); }
+        /* Container & Cards */
+        .container { padding: 30px 20px; max-width: 800px; margin: 0 auto; }
+        .card { background: var(--bg-card); padding: 25px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; }
+        h2 { margin-top: 0; font-size: 1.2rem; margin-bottom: 15px; }
+
+        input, select { width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid var(--border); border-radius: 10px; color: white; margin-top: 8px; outline: none; box-sizing: border-box; }
+        .btn-action { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: 700; width: 100%; margin-top: 15px; }
 
         /* Tables */
-        .result-box {
-            background: var(--bg-dark);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            margin-top: 20px;
-        }
-
+        .result-box { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 15px; }
         table { width: 100%; border-collapse: collapse; }
-        th { background: rgba(255,255,255,0.03); color: var(--text-light); font-size: 0.7rem; text-align: left; padding: 15px; border-bottom: 1px solid var(--border); text-transform: uppercase; }
-        td { padding: 15px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
-        
-        .btn-cancel { background: var(--danger); border: none; color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; }
+        th { background: rgba(255,255,255,0.03); color: var(--text-light); font-size: 0.65rem; text-align: left; padding: 12px 15px; border-bottom: 1px solid var(--border); text-transform: uppercase; }
+        td { padding: 12px 15px; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+        .btn-cancel { background: var(--danger); border: none; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.7rem; }
 
         /* Modal */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); }
-        .modal-content { background: var(--bg-card); margin: 15vh auto; padding: 30px; border-radius: 20px; width: 320px; border: 1px solid var(--border); }
+        .modal-content { background: var(--bg-card); margin: 20vh auto; padding: 25px; border-radius: 20px; width: 300px; border: 1px solid var(--border); }
 
-        /* Responsive Mobile */
         @media (max-width: 768px) {
-            .navbar { padding: 0 15px; }
             .nav-item span { display: none; }
-            .nav-brand { font-size: 1.2rem; }
-            .clock { display: none; }
-            .container { padding: 20px 15px; }
+            .nav-brand { font-size: 1.1rem; }
+            .container { padding: 15px; }
         }
     </style>
 </head>
@@ -183,16 +93,17 @@
         </div>
 
         <div class="header-right">
-            <div id="header-clock" class="clock">00:00:00</div>
-            <div id="otp-balance-display" onclick="openModal()">$ 0.00</div>
+            <div id="otp-balance-display" onclick="openModal()" class="offline">OFFLINE</div>
+            <button class="btn-refresh-balance" onclick="connectAPI()">
+                <i class="fas fa-sync-alt" id="balance-icon"></i>
+            </button>
         </div>
     </nav>
 
     <div id="apiModal" class="modal">
         <div class="modal-content">
-            <h3 style="margin-top:0">Settings</h3>
-            <p style="font-size: 0.8rem; color: var(--text-light);">Update API Key HeroSMS (USD)</p>
-            <input type="password" id="api-key-input" placeholder="Paste API Key here...">
+            <h3 style="margin-top:0">API Config</h3>
+            <input type="password" id="api-key-input" placeholder="Enter API Key USD...">
             <button class="btn-action" onclick="saveApiKey()">Save API</button>
             <button class="btn-action" onclick="closeModal()" style="background:transparent; border:1px solid var(--border); margin-top:10px;">Close</button>
         </div>
@@ -201,14 +112,14 @@
     <div class="container">
         <div id="tab-home" class="tab-content">
             <div class="card">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                    <h2 style="margin:0">Indonesia Stock 🇮🇩</h2>
-                    <button onclick="getPrices()" style="background:var(--primary); border:none; color:white; width:35px; height:35px; border-radius:8px; cursor:pointer;"><i class="fas fa-sync" id="refresh-icon"></i></button>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                    <h2 style="margin:0">Stock 🇮🇩</h2>
+                    <button onclick="getPrices()" style="background:transparent; border:none; color:var(--primary); cursor:pointer;"><i class="fas fa-redo" id="price-icon"></i></button>
                 </div>
                 <div class="result-box">
                     <table>
-                        <thead><tr><th>Layanan</th><th>Stok</th><th>Harga</th></tr></thead>
-                        <tbody id="dashboard-prices"><tr><td colspan="3" style="text-align:center; padding:30px;">Loading data...</td></tr></tbody>
+                        <thead><tr><th>Service</th><th>Stock</th><th>Price</th></tr></thead>
+                        <tbody id="dashboard-prices"><tr><td colspan="3" style="text-align:center; padding:30px; color:var(--text-light)">Connect API first.</td></tr></tbody>
                     </table>
                 </div>
             </div>
@@ -216,22 +127,22 @@
 
         <div id="tab-otp-order" class="tab-content" style="display:none">
             <div class="card">
-                <h2>New Order</h2>
+                <h2>Quick Order</h2>
                 <select id="order-service">
                     <option value="wa">WhatsApp</option><option value="tg">Telegram</option><option value="go">Google</option>
                     <option value="tk">TikTok</option><option value="fb">Facebook</option><option value="ig">Instagram</option>
                     <option value="sh">Shopee</option><option value="tw">Twitter</option>
                 </select>
-                <button class="btn-action" onclick="heroSmsAction('order')">PURCHASE NUMBER</button>
+                <button class="btn-action" onclick="heroSmsAction('order')">GET NUMBER</button>
                 <div id="result-otp-order" class="result-box" style="display:none; padding:20px; text-align:center;"></div>
             </div>
         </div>
 
         <div id="tab-otp-active" class="tab-content" style="display:none">
             <div class="card">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                    <h2 style="margin:0">Active Activations</h2>
-                    <button class="btn-action" style="width:100px; margin-top:0; font-size:0.8rem;" onclick="heroSmsAction('active')">REFRESH</button>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                    <h2 style="margin:0">Active Session</h2>
+                    <button class="btn-action" style="width:50px; margin-top:0;" onclick="heroSmsAction('active')"><i class="fas fa-sync"></i></button>
                 </div>
                 <div id="result-otp-active" class="result-box"></div>
             </div>
@@ -243,10 +154,7 @@
         const PROXY = "https://api.allorigins.win/raw?url=";
         const API_TARGET = "https://hero-sms.com/stubs/handler_api.php";
         
-        function getBaseUrl(params) {
-            return PROXY + encodeURIComponent(API_TARGET + "?" + params);
-        }
-
+        function getBaseUrl(params) { return PROXY + encodeURIComponent(API_TARGET + "?" + params); }
         const serviceNames = { 'wa': 'WhatsApp', 'tg': 'Telegram', 'go': 'Google', 'tk': 'TikTok', 'fb': 'Facebook', 'ig': 'Instagram', 'sh': 'Shopee', 'tw': 'Twitter' };
 
         function openModal() { document.getElementById('apiModal').style.display = 'block'; }
@@ -257,11 +165,7 @@
             if(val) { CURRENT_API_KEY = val; localStorage.setItem('herosms_key', val); connectAPI(); closeModal(); }
         }
 
-        function updateClock() {
-            document.getElementById('header-clock').innerText = new Date().toLocaleTimeString('id-ID', {hour12:false});
-        }
-
-        window.onload = () => { setInterval(updateClock, 1000); updateClock(); if(CURRENT_API_KEY) connectAPI(); showTab('home'); };
+        window.onload = () => { if(CURRENT_API_KEY) { document.getElementById('api-key-input').value = CURRENT_API_KEY; connectAPI(); } showTab('home'); };
 
         function showTab(name) {
             document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
@@ -275,18 +179,30 @@
 
         async function connectAPI() {
             if(!CURRENT_API_KEY) return;
+            const btnIcon = document.getElementById('balance-icon');
+            const balDisp = document.getElementById('otp-balance-display');
+            btnIcon.classList.add('fa-spin');
+            
             try {
                 const res = await fetch(getBaseUrl(`api_key=${CURRENT_API_KEY}&action=getBalance`));
                 const data = await res.text();
                 if (data.includes("ACCESS_BALANCE")) {
-                    document.getElementById('otp-balance-display').innerText = "$ " + data.split(':')[1];
+                    balDisp.innerText = "$ " + data.split(':')[1];
+                    balDisp.className = "online";
                     getPrices();
+                } else {
+                    balDisp.innerText = "INVALID";
+                    balDisp.className = "offline";
                 }
-            } catch (e) { }
+            } catch (e) {
+                balDisp.innerText = "ERROR";
+                balDisp.className = "offline";
+            } finally { setTimeout(() => btnIcon.classList.remove('fa-spin'), 600); }
         }
 
         async function getPrices() {
-            const icon = document.getElementById('refresh-icon');
+            if(!CURRENT_API_KEY) return;
+            const icon = document.getElementById('price-icon');
             icon.classList.add('fa-spin');
             try {
                 const res = await fetch(getBaseUrl(`api_key=${CURRENT_API_KEY}&action=getPrices&country=6`));
@@ -298,8 +214,8 @@
                         rows += `<tr><td><b>${serviceNames[s]}</b></td><td>${dataID[s].count}</td><td style="color:var(--success); font-weight:800">$ ${dataID[s].cost}</td></tr>`;
                     }
                 }
-                document.getElementById('dashboard-prices').innerHTML = rows || "<tr><td colspan='3'>No Data</td></tr>";
-            } finally { setTimeout(()=>icon.classList.remove('fa-spin'), 500); }
+                document.getElementById('dashboard-prices').innerHTML = rows || "<tr><td colspan='3'>No Stock</td></tr>";
+            } finally { setTimeout(() => icon.classList.remove('fa-spin'), 600); }
         }
 
         async function heroSmsAction(type) {
@@ -316,20 +232,20 @@
                 if(type === 'active') {
                     const json = JSON.parse(raw);
                     const list = json.activeActivations?.rows || [];
-                    if(list.length === 0) { box.innerHTML = "<div style='padding:30px; color:gray; text-align:center;'>No active numbers.</div>"; return; }
+                    if(list.length === 0) { box.innerHTML = "<div style='padding:30px; color:gray; text-align:center;'>No active orders.</div>"; return; }
                     let h = "<table><thead><tr><th>ID</th><th>Number</th><th>OTP</th><th>Action</th></tr></thead><tbody>";
-                    h += list.map(a => `<tr><td>${a.activationId}</td><td>+${a.phoneNumber}</td><td style="color:var(--success); font-weight:800">${a.smsCode || 'Waiting...'}</td><td><button class="btn-cancel" onclick="cancelOrder('${a.activationId}')">Cancel</button></td></tr>`).join('');
+                    h += list.map(a => `<tr><td>${a.activationId}</td><td>+${a.phoneNumber}</td><td style="color:var(--success); font-weight:800">${a.smsCode || 'WAITING'}</td><td><button class="btn-cancel" onclick="cancelOrder('${a.activationId}')">Cancel</button></td></tr>`).join('');
                     box.innerHTML = h + "</tbody></table>";
                 } else if(type === 'order' && raw.includes("ACCESS_NUMBER")) {
                     const [ , id, num] = raw.split(':');
-                    box.innerHTML = `<div style='padding:20px;'>ID: ${id}<br><b style='font-size:1.8rem; margin:10px 0; display:block;'>+${num}</b><button class="btn-cancel" onclick="cancelOrder('${id}')" style="width:100%">Cancel & Refund</button></div>`;
+                    box.innerHTML = `<div style='padding:20px;'>ID: ${id}<br><b style='font-size:1.8rem; margin:10px 0; display:block;'>+${num}</b><button class="btn-cancel" onclick="cancelOrder('${id}')" style="width:100%">Cancel / Refund</button></div>`;
                 } else { box.innerHTML = `<div style='padding:20px;'>${raw}</div>`; }
                 connectAPI();
-            } catch(e) { box.innerHTML = "Error."; }
+            } catch(e) { box.innerHTML = "Request failed."; }
         }
 
         async function cancelOrder(id) {
-            if(!confirm("Refund saldo?")) return;
+            if(!confirm("Cancel and refund?")) return;
             await fetch(getBaseUrl(`api_key=${CURRENT_API_KEY}&action=setStatus&status=8&id=${id}`));
             connectAPI(); 
             if(document.getElementById('tab-otp-active').style.display === 'block') heroSmsAction('active');
