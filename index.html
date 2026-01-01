@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTP</title>
+    <title>OTP - VirtuSim</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -20,7 +20,6 @@
 
         body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text); margin: 0; padding-top: var(--nav-height); }
 
-        /* Navbar */
         .navbar {
             height: var(--nav-height); background: var(--bg-card); border-bottom: 1px solid var(--border);
             display: flex; align-items: center; justify-content: space-between; padding: 0 5%;
@@ -35,7 +34,6 @@
         }
         .nav-item:hover, .nav-item.active { background: rgba(79, 70, 229, 0.1); color: var(--primary); }
 
-        /* Status & Balance UI */
         .header-right { display: flex; align-items: center; gap: 10px; }
         
         #otp-balance-display {
@@ -43,41 +41,33 @@
             cursor: pointer; transition: 0.3s; border: 1px solid #64748b; color: #64748b; background: rgba(100, 116, 139, 0.1);
             min-width: 80px; text-align: center;
         }
-        /* State Online */
         #otp-balance-display.online { color: var(--success); border-color: var(--success); background: rgba(46, 204, 113, 0.1); }
-        /* State Offline */
         #otp-balance-display.offline { color: var(--danger); border-color: var(--danger); background: rgba(239, 68, 68, 0.1); }
 
         .btn-refresh-balance {
             background: var(--bg-dark); border: 1px solid var(--border); color: var(--text-light);
             width: 38px; height: 38px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: 0.2s;
         }
-        .btn-refresh-balance:hover { border-color: var(--primary); color: var(--primary); }
 
-        /* Container & Cards */
         .container { padding: 30px 20px; max-width: 800px; margin: 0 auto; }
         .card { background: var(--bg-card); padding: 25px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; }
         h2 { margin-top: 0; font-size: 1.2rem; margin-bottom: 15px; }
 
-        input, select { width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid var(--border); border-radius: 10px; color: white; margin-top: 8px; outline: none; box-sizing: border-box; }
+        input, select { width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid var(--border); border-radius: 10px; color: white; margin-top: 8px; box-sizing: border-box; }
         .btn-action { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: 700; width: 100%; margin-top: 15px; }
 
-        /* Tables */
         .result-box { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 15px; }
         table { width: 100%; border-collapse: collapse; }
         th { background: rgba(255,255,255,0.03); color: var(--text-light); font-size: 0.65rem; text-align: left; padding: 12px 15px; border-bottom: 1px solid var(--border); text-transform: uppercase; }
         td { padding: 12px 15px; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
         .btn-cancel { background: var(--danger); border: none; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.7rem; }
 
-        /* Modal */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); }
         .modal-content { background: var(--bg-card); margin: 20vh auto; padding: 25px; border-radius: 20px; width: 300px; border: 1px solid var(--border); }
 
         @media (max-width: 768px) {
             .nav-item span { display: none; }
             .nav-brand { font-size: 1.1rem; }
-            .container { padding: 15px; }
         }
     </style>
 </head>
@@ -85,25 +75,21 @@
 
     <nav class="navbar">
         <div class="nav-brand">OTP</div>
-        
         <div class="nav-links">
-            <a class="nav-item active" id="nav-home" onclick="showTab('home')"><i class="fas fa-th-large"></i><span>Home</span></a>
+            <a class="nav-item active" id="nav-home" onclick="showTab('home')"><i class="fas fa-th-large"></i><span>Stock</span></a>
             <a class="nav-item" id="nav-order" onclick="showTab('otp-order')"><i class="fas fa-shopping-cart"></i><span>Order</span></a>
-            <a class="nav-item" id="nav-active" onclick="showTab('otp-active')"><i class="fas fa-clock"></i><span>Active</span></a>
+            <a class="nav-item" id="nav-active" onclick="showTab('otp-active')"><i class="fas fa-history"></i><span>Active</span></a>
         </div>
-
         <div class="header-right">
             <div id="otp-balance-display" onclick="openModal()" class="offline">OFFLINE</div>
-            <button class="btn-refresh-balance" onclick="connectAPI()">
-                <i class="fas fa-sync-alt" id="balance-icon"></i>
-            </button>
+            <button class="btn-refresh-balance" onclick="connectAPI()"><i class="fas fa-sync-alt" id="balance-icon"></i></button>
         </div>
     </nav>
 
     <div id="apiModal" class="modal">
         <div class="modal-content">
-            <h3 style="margin-top:0">API Config</h3>
-            <input type="password" id="api-key-input" placeholder="Enter API Key USD...">
+            <h3 style="margin-top:0">VirtuSim Config</h3>
+            <input type="password" id="api-key-input" placeholder="Masukkan API Key VirtuSim...">
             <button class="btn-action" onclick="saveApiKey()">Save API</button>
             <button class="btn-action" onclick="closeModal()" style="background:transparent; border:1px solid var(--border); margin-top:10px;">Close</button>
         </div>
@@ -113,13 +99,13 @@
         <div id="tab-home" class="tab-content">
             <div class="card">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                    <h2 style="margin:0">Stock 🇮🇩</h2>
-                    <button onclick="getPrices()" style="background:transparent; border:none; color:var(--primary); cursor:pointer;"><i class="fas fa-redo" id="price-icon"></i></button>
+                    <h2 style="margin:0">Available Services</h2>
+                    <button onclick="getServices()" style="background:transparent; border:none; color:var(--primary); cursor:pointer;"><i class="fas fa-redo" id="price-icon"></i></button>
                 </div>
                 <div class="result-box">
                     <table>
-                        <thead><tr><th>Service</th><th>Stock</th><th>Price</th></tr></thead>
-                        <tbody id="dashboard-prices"><tr><td colspan="3" style="text-align:center; padding:30px; color:var(--text-light)">Connect API first.</td></tr></tbody>
+                        <thead><tr><th>ID</th><th>Layanan</th><th>Harga</th></tr></thead>
+                        <tbody id="dashboard-prices"><tr><td colspan="3" style="text-align:center; padding:30px; color:var(--text-light)">Hubungkan API...</td></tr></tbody>
                     </table>
                 </div>
             </div>
@@ -127,13 +113,19 @@
 
         <div id="tab-otp-order" class="tab-content" style="display:none">
             <div class="card">
-                <h2>Quick Order</h2>
-                <select id="order-service">
-                    <option value="wa">WhatsApp</option><option value="tg">Telegram</option><option value="go">Google</option>
-                    <option value="tk">TikTok</option><option value="fb">Facebook</option><option value="ig">Instagram</option>
-                    <option value="sh">Shopee</option><option value="tw">Twitter</option>
+                <h2>Beli Nomor</h2>
+                <label style="font-size:0.8rem; color:var(--text-light)">ID Layanan (cek di tab Stock)</label>
+                <input type="number" id="order-service-id" placeholder="Contoh: 26">
+                <label style="font-size:0.8rem; color:var(--text-light); margin-top:10px; display:block;">Operator</label>
+                <select id="order-operator">
+                    <option value="any">Any (Random)</option>
+                    <option value="telkomsel">Telkomsel</option>
+                    <option value="axis">Axis/XL</option>
+                    <option value="indosat">Indosat</option>
+                    <option value="three">Three</option>
+                    <option value="smartfren">Smartfren</option>
                 </select>
-                <button class="btn-action" onclick="heroSmsAction('order')">GET NUMBER</button>
+                <button class="btn-action" onclick="virtuAction('order')">PESAN NOMOR</button>
                 <div id="result-otp-order" class="result-box" style="display:none; padding:20px; text-align:center;"></div>
             </div>
         </div>
@@ -141,8 +133,8 @@
         <div id="tab-otp-active" class="tab-content" style="display:none">
             <div class="card">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                    <h2 style="margin:0">Active Session</h2>
-                    <button class="btn-action" style="width:50px; margin-top:0;" onclick="heroSmsAction('active')"><i class="fas fa-sync"></i></button>
+                    <h2 style="margin:0">Antrean SMS</h2>
+                    <button class="btn-action" style="width:50px; margin-top:0;" onclick="virtuAction('active')"><i class="fas fa-sync"></i></button>
                 </div>
                 <div id="result-otp-active" class="result-box"></div>
             </div>
@@ -150,22 +142,27 @@
     </div>
 
     <script>
-        let CURRENT_API_KEY = localStorage.getItem('herosms_key') || "";
+        let CURRENT_API_KEY = localStorage.getItem('virtusim_key') || "";
         const PROXY = "https://api.allorigins.win/raw?url=";
-        const API_TARGET = "https://hero-sms.com/stubs/handler_api.php";
-        
-        function getBaseUrl(params) { return PROXY + encodeURIComponent(API_TARGET + "?" + params); }
-        const serviceNames = { 'wa': 'WhatsApp', 'tg': 'Telegram', 'go': 'Google', 'tk': 'TikTok', 'fb': 'Facebook', 'ig': 'Instagram', 'sh': 'Shopee', 'tw': 'Twitter' };
+        const API_URL = "https://virtusim.com/api/json.php";
+
+        async function callVirtu(data) {
+            // Kita kirim via GET lewat proxy AllOrigins, tapi AllOrigins meneruskan URL dengan params
+            let params = new URLSearchParams(data).toString();
+            const target = `${API_URL}?${params}`;
+            const response = await fetch(PROXY + encodeURIComponent(target));
+            return await response.json();
+        }
 
         function openModal() { document.getElementById('apiModal').style.display = 'block'; }
         function closeModal() { document.getElementById('apiModal').style.display = 'none'; }
         
         function saveApiKey() {
             const val = document.getElementById('api-key-input').value.trim();
-            if(val) { CURRENT_API_KEY = val; localStorage.setItem('herosms_key', val); connectAPI(); closeModal(); }
+            if(val) { CURRENT_API_KEY = val; localStorage.setItem('virtusim_key', val); connectAPI(); closeModal(); }
         }
 
-        window.onload = () => { if(CURRENT_API_KEY) { document.getElementById('api-key-input').value = CURRENT_API_KEY; connectAPI(); } showTab('home'); };
+        window.onload = () => { if(CURRENT_API_KEY) connectAPI(); showTab('home'); };
 
         function showTab(name) {
             document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
@@ -173,82 +170,67 @@
             document.getElementById('tab-' + name).style.display = 'block';
             const navId = name.includes('otp') ? 'nav-' + name.split('-')[1] : 'nav-' + name;
             document.getElementById(navId).classList.add('active');
-            if(name === 'home' && CURRENT_API_KEY) getPrices();
-            if(name === 'otp-active' && CURRENT_API_KEY) heroSmsAction('active');
+            if(name === 'home' && CURRENT_API_KEY) getServices();
+            if(name === 'otp-active' && CURRENT_API_KEY) virtuAction('active');
         }
 
         async function connectAPI() {
             if(!CURRENT_API_KEY) return;
-            const btnIcon = document.getElementById('balance-icon');
             const balDisp = document.getElementById('otp-balance-display');
-            btnIcon.classList.add('fa-spin');
-            
             try {
-                const res = await fetch(getBaseUrl(`api_key=${CURRENT_API_KEY}&action=getBalance`));
-                const data = await res.text();
-                if (data.includes("ACCESS_BALANCE")) {
-                    balDisp.innerText = "$ " + data.split(':')[1];
+                const res = await callVirtu({ api_key: CURRENT_API_KEY, action: 'profile' });
+                if(res.status) {
+                    balDisp.innerText = "Rp " + parseInt(res.data.balance).toLocaleString('id-ID');
                     balDisp.className = "online";
-                    getPrices();
-                } else {
-                    balDisp.innerText = "INVALID";
-                    balDisp.className = "offline";
-                }
-            } catch (e) {
-                balDisp.innerText = "ERROR";
-                balDisp.className = "offline";
-            } finally { setTimeout(() => btnIcon.classList.remove('fa-spin'), 600); }
+                    getServices();
+                } else { balDisp.className = "offline"; balDisp.innerText = "INVALID"; }
+            } catch (e) { balDisp.className = "offline"; }
         }
 
-        async function getPrices() {
-            if(!CURRENT_API_KEY) return;
+        async function getServices() {
             const icon = document.getElementById('price-icon');
             icon.classList.add('fa-spin');
             try {
-                const res = await fetch(getBaseUrl(`api_key=${CURRENT_API_KEY}&action=getPrices&country=6`));
-                const json = await res.json();
-                let rows = "";
-                const dataID = json["6"] || {};
-                for(let s in dataID) {
-                    if(serviceNames[s]) {
-                        rows += `<tr><td><b>${serviceNames[s]}</b></td><td>${dataID[s].count}</td><td style="color:var(--success); font-weight:800">$ ${dataID[s].cost}</td></tr>`;
-                    }
+                const res = await callVirtu({ api_key: CURRENT_API_KEY, action: 'services' });
+                if(res.status) {
+                    let rows = res.data.map(s => `<tr><td>${s.id}</td><td><b>${s.name}</b></td><td style="color:var(--success)">Rp ${parseInt(s.price).toLocaleString('id-ID')}</td></tr>`).join('');
+                    document.getElementById('dashboard-prices').innerHTML = rows;
                 }
-                document.getElementById('dashboard-prices').innerHTML = rows || "<tr><td colspan='3'>No Stock</td></tr>";
-            } finally { setTimeout(() => icon.classList.remove('fa-spin'), 600); }
+            } finally { setTimeout(()=>icon.classList.remove('fa-spin'), 500); }
         }
 
-        async function heroSmsAction(type) {
+        async function virtuAction(type) {
             const box = document.getElementById(`result-otp-${type}`);
-            box.innerHTML = "<div style='padding:20px; text-align:center;'><i class='fas fa-spinner fa-spin'></i></div>";
             box.style.display = "block";
-            let params = `api_key=${CURRENT_API_KEY}`;
-            if(type === 'order') params += `&action=getNumber&service=${document.getElementById('order-service').value}&country=6`;
-            if(type === 'active') params += `&action=getActiveActivations`;
+            box.innerHTML = "<div style='padding:20px; text-align:center;'><i class='fas fa-spinner fa-spin'></i></div>";
 
             try {
-                const res = await fetch(getBaseUrl(params));
-                const raw = await res.text();
-                if(type === 'active') {
-                    const json = JSON.parse(raw);
-                    const list = json.activeActivations?.rows || [];
-                    if(list.length === 0) { box.innerHTML = "<div style='padding:30px; color:gray; text-align:center;'>No active orders.</div>"; return; }
-                    let h = "<table><thead><tr><th>ID</th><th>Number</th><th>OTP</th><th>Action</th></tr></thead><tbody>";
-                    h += list.map(a => `<tr><td>${a.activationId}</td><td>+${a.phoneNumber}</td><td style="color:var(--success); font-weight:800">${a.smsCode || 'WAITING'}</td><td><button class="btn-cancel" onclick="cancelOrder('${a.activationId}')">Cancel</button></td></tr>`).join('');
-                    box.innerHTML = h + "</tbody></table>";
-                } else if(type === 'order' && raw.includes("ACCESS_NUMBER")) {
-                    const [ , id, num] = raw.split(':');
-                    box.innerHTML = `<div style='padding:20px;'>ID: ${id}<br><b style='font-size:1.8rem; margin:10px 0; display:block;'>+${num}</b><button class="btn-cancel" onclick="cancelOrder('${id}')" style="width:100%">Cancel / Refund</button></div>`;
-                } else { box.innerHTML = `<div style='padding:20px;'>${raw}</div>`; }
+                if(type === 'order') {
+                    const sid = document.getElementById('order-service-id').value;
+                    const op = document.getElementById('order-operator').value;
+                    const res = await callVirtu({ api_key: CURRENT_API_KEY, action: 'order', service: sid, operator: op });
+                    if(res.status) {
+                        box.innerHTML = `<div style='padding:20px;'>ID: ${res.data.id}<br><b style='font-size:1.8rem; margin:10px 0; display:block;'>${res.data.number}</b><small>Menunggu SMS...</small></div>`;
+                    } else { box.innerHTML = `<div style='padding:20px; color:var(--danger)'>${res.msg}</div>`; }
+                } 
+                else if(type === 'active') {
+                    const res = await callVirtu({ api_key: CURRENT_API_KEY, action: 'active_order' });
+                    if(res.status && res.data.length > 0) {
+                        let h = "<table><thead><tr><th>Number</th><th>OTP</th><th>Action</th></tr></thead><tbody>";
+                        h += res.data.map(a => `<tr><td>${a.number}</td><td style="color:var(--success); font-weight:800">${a.sms || 'WAITING'}</td><td><button class="btn-cancel" onclick="setStatus('${a.id}', 2)">Cancel</button></td></tr>`).join('');
+                        box.innerHTML = h + "</tbody></table>";
+                    } else { box.innerHTML = "<div style='padding:20px; color:gray;'>Tidak ada pesanan aktif.</div>"; }
+                }
                 connectAPI();
-            } catch(e) { box.innerHTML = "Request failed."; }
+            } catch(e) { box.innerHTML = "Error."; }
         }
 
-        async function cancelOrder(id) {
-            if(!confirm("Cancel and refund?")) return;
-            await fetch(getBaseUrl(`api_key=${CURRENT_API_KEY}&action=setStatus&status=8&id=${id}`));
-            connectAPI(); 
-            if(document.getElementById('tab-otp-active').style.display === 'block') heroSmsAction('active');
+        async function setStatus(id, stat) {
+            if(!confirm("Yakin ingin mengubah status?")) return;
+            const res = await callVirtu({ api_key: CURRENT_API_KEY, action: 'set_status', id: id, status: stat });
+            alert(res.msg);
+            virtuAction('active');
+            connectAPI();
         }
     </script>
 </body>
